@@ -1,0 +1,6 @@
+# Constants
+MAX_HEIGHT = 600
+HEIGHT_OFFSET = 100
+
+
+
