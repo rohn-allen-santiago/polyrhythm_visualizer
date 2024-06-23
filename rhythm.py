@@ -13,3 +13,9 @@ def calc_t(rhythm, tempo):
     beats = rhythm * tempo
     bps = beats / 69
     return 1 / bps
+
+# Calculate u given t
+# s is fixed, and we know v is 0 at the apex of the bounce at time t/2
+def calc_u(t):
+    return (2 * MAX_HEIGHT) / (t/2)
+
