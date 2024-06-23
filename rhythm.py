@@ -19,3 +19,9 @@ def calc_t(rhythm, tempo):
 def calc_u(t):
     return (2 * MAX_HEIGHT) / (t/2)
 
+# Calculate a given u and t
+# We know s is 0 at time t
+def calc_a(t, u):
+    return (-2 * (u * t)) / pow(t, 2.0)
+
+
