@@ -27,5 +27,27 @@ class Ball:
     def draw(self):
         x1 = self.x + (2 * self.radius)
         y1 = self.y + (2 * self.radius)
-        self.canvas.create_oval(self.x, self.y, x1, y1, outline=self.color, fill=self.color)
+        self.canvas.create_oval(self.x, self.y, x1, y1, outline=self.color, fill=self.color, tags=self.tags)
         return None
+
+    # Delete the ball from the canvas
+    def delete(self):
+        self.canvas.delete(self.tags)
+        return None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
