@@ -5,13 +5,78 @@
 # radius is the radius of the circle
 # color is the color of the circle
 # time is the timestamp of the ball, used for calculating its velocity and acceleration
+# u and a are the initial velocity and acceleration of the ball respectively
+
+from time import *
+from rhythm import *
 
 class Ball:
-    def __init__(self, canvas, tag, x, y, radius, color, time):
+
+    # Initialize the ball object
+    def __init__(self, canvas, tags, x, color):
         self.canvas = canvas
-        self.tag = tag
+        self.tags = tags
         self.x = x
-        self.y = y
-        self.radius = radius
+        self.y = 600
+        self.radius = 50
         self.color = color
-        self.time = time
+        self.time = time()
+        self.u= 0.0
+        self.a = 0.0
+
+    # Draw the ball on the canvas
+    def draw(self):
+        x1 = self.x + (2 * self.radius)
+        y1 = self.y + (2 * self.radius)
+        self.canvas.create_oval(self.x, self.y, x1, y1, outline=self.color, fill=self.color, tags=self.tags)
+        self.time = time()
+        return None
+
+    # Delete the ball from the canvas
+    def delete(self):
+        self.canvas.delete(self.tags)
+        return None
+
+    # Move ball on the canvas
+    def move(self, dx, dy):
+        self.canvas.move(self.tags, dx, dy)
+        return None
+
+    # Calculate and update u and a given a rhythm and tempo
+    def set_speed(self, rhythm, tempo):
+        t = calc_t(rhythm, tempo)
+        u = calc_u(t)
+        a = calc_a(t, u)
+        self.u = u
+        self.a = a
+        return None
+
+    # Update the ball's position on the canvas
+    def update(self):
+        t = time() - self.time
+        s = calc_s(t, self.u, self.a)
+        if s <= 0:
+            self.time = time()
+
+        # Convert s into the correct coordinate on the canvas
+        ds = MAX_HEIGHT - s
+        y = HEIGHT_OFFSET + ds
+        dy = y - self.y
+        self.y = self.y + dy
+
+        # Move the ball by the calculated dy
+        self.move(0, round(dy))
+
+        return None
+
+
+
+
+
+
+
+
+
+
+
+
