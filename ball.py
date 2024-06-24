@@ -8,6 +8,7 @@
 # u and a are the initial velocity and acceleration of the ball respectively
 
 from time import *
+from rhythm import *
 
 class Ball:
 
@@ -40,7 +41,14 @@ class Ball:
         self.canvas.move(self.tags, dx, dy)
         return None
 
-
+    # Calculate and update u and a given a rhythm and tempo
+    def calc(self, rhythm, tempo):
+        t = calc_t(rhythm, tempo)
+        u = calc_u(t)
+        a = calc_a(t, u)
+        self.u = u
+        self.a = a
+        return None
 
 
 
