@@ -13,12 +13,12 @@ from rhythm import *
 class Ball:
 
     # Initialize the ball object
-    def __init__(self, canvas, tags, x, y, radius, color):
+    def __init__(self, canvas, tags, x, color):
         self.canvas = canvas
         self.tags = tags
         self.x = x
-        self.y = y
-        self.radius = radius
+        self.y = 600
+        self.radius = 50
         self.color = color
         self.time = time()
         self.u= 0.0
@@ -29,6 +29,7 @@ class Ball:
         x1 = self.x + (2 * self.radius)
         y1 = self.y + (2 * self.radius)
         self.canvas.create_oval(self.x, self.y, x1, y1, outline=self.color, fill=self.color, tags=self.tags)
+        self.time = time()
         return None
 
     # Delete the ball from the canvas
@@ -42,7 +43,7 @@ class Ball:
         return None
 
     # Calculate and update u and a given a rhythm and tempo
-    def calc(self, rhythm, tempo):
+    def set_speed(self, rhythm, tempo):
         t = calc_t(rhythm, tempo)
         u = calc_u(t)
         a = calc_a(t, u)
@@ -50,6 +51,23 @@ class Ball:
         self.a = a
         return None
 
+    # Update the ball's position on the canvas
+    def update(self):
+        t = time() - self.time
+        s = calc_s(t, self.u, self.a)
+        if s <= 0:
+            self.time = time()
+
+        # Convert s into the correct coordinate on the canvas
+        ds = MAX_HEIGHT - s
+        y = HEIGHT_OFFSET + ds
+        dy = y - self.y
+        self.y = self.y + dy
+
+        # Move the ball by the calculated dy
+        self.move(0, round(dy))
+
+        return None
 
 
 
