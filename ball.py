@@ -35,7 +35,10 @@ class Ball:
         self.canvas.delete(self.tags)
         return None
 
-
+    # Move ball on the canvas
+    def move(self, dx, dy):
+        self.canvas.move(self.tags, dx, dy)
+        return None
 
 
 
