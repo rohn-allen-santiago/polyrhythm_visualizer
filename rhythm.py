@@ -1,7 +1,7 @@
 from math import *
 
 # Constants
-MAX_HEIGHT = 600
+MAX_HEIGHT = 500
 HEIGHT_OFFSET = 100
 
 # Calculating path of bouncing circle
