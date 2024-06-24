@@ -24,4 +24,12 @@ def calc_u(t):
 def calc_a(t, u):
     return (-2 * (u * t)) / pow(t, 2.0)
 
-
+# Calculate s given a, u and t
+# If s < 0,  set s to 0
+# If s > 600, set s to 500 (should not be possible)
+def calc_s(t, u, a):
+    s = (u * t) + (0.5 * a * pow(t, 2.0))
+    if s < 0:
+        return 0
+    else:
+        return s
