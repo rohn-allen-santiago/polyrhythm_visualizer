@@ -7,22 +7,24 @@
 # time is the timestamp of the ball, used for calculating its velocity and acceleration
 # u and a are the initial velocity and acceleration of the ball respectively
 
-from tkinter import *
+from time import *
 
 class Ball:
 
     # Initialize the ball object
-    def __init__(self, canvas, tag, x, y, radius, color, time, u, a):
+    def __init__(self, canvas, tags, x, y, radius, color):
         self.canvas = canvas
-        self.tag = tag
+        self.tags = tags
         self.x = x
         self.y = y
         self.radius = radius
         self.color = color
-        self.time = time
+        self.time = time()
+        self.u= 0.0
+        self.a = 0.0
 
     # Draw the ball on the canvas
-    def draw_ball(self):
+    def draw(self):
         x1 = self.x + (2 * self.radius)
         y1 = self.y + (2 * self.radius)
         self.canvas.create_oval(self.x, self.y, x1, y1, outline=self.color, fill=self.color)
