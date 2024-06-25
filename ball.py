@@ -9,6 +9,7 @@
 
 from time import *
 from rhythm import *
+from pygame import mixer
 
 class Ball:
 
@@ -57,6 +58,7 @@ class Ball:
         s = calc_s(t, self.u, self.a)
         if s <= 0:
             self.time = time()
+            self.play_audio("audio/metronome.mp3")
 
         # Convert s into the correct coordinate on the canvas
         ds = MAX_HEIGHT - s
@@ -69,8 +71,11 @@ class Ball:
 
         return None
 
-
-
+    def play_audio(self, path):
+        mixer.init()
+        mixer.music.load("audio/metronome.mp3")
+        mixer.music.play()
+        return None
 
 
 
