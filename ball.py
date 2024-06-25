@@ -9,6 +9,7 @@
 
 from time import *
 from rhythm import *
+from pygame import mixer
 
 class Ball:
 
@@ -29,6 +30,7 @@ class Ball:
         x1 = self.x + (2 * self.radius)
         y1 = self.y + (2 * self.radius)
         self.canvas.create_oval(self.x, self.y, x1, y1, outline=self.color, fill=self.color, tags=self.tags)
+        self.play_audio("audio/metronome.mp3")
         self.time = time()
         return None
 
@@ -57,6 +59,7 @@ class Ball:
         s = calc_s(t, self.u, self.a)
         if s <= 0:
             self.time = time()
+            self.play_audio("audio/metronome.mp3")
 
         # Convert s into the correct coordinate on the canvas
         ds = MAX_HEIGHT - s
@@ -69,8 +72,12 @@ class Ball:
 
         return None
 
-
-
+    # Play metronome sound
+    def play_audio(self, path):
+        mixer.init()
+        mixer.music.load("audio/metronome.mp3")
+        mixer.music.play()
+        return None
 
 
 
