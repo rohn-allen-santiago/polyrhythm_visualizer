@@ -14,7 +14,7 @@ from pygame import mixer
 class Ball:
 
     # Initialize the ball object
-    def __init__(self, canvas, tags, x, color, tempo, rhythm):
+    def __init__(self, canvas, tags, x, color):
         self.canvas = canvas
         self.tags = tags
         self.x = x
