@@ -24,8 +24,8 @@ class Ball:
         self.time = time()
         self.u= 0.0
         self.a = 0.0
-        self.tempo = 0
-        self.rhythm = 0
+        self.tempo = 60.0
+        self.rhythm = 0.0
 
     # Set ball's tempo
     def set_tempo(self, tempo):
