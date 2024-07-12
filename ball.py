@@ -47,6 +47,8 @@ class Ball:
 
     # Draw the ball on the canvas
     def draw(self):
+        if (self.get_tempo() == 0) or (self.get_rhythm() == 0):
+            return None
         x1 = self.x + (2 * self.radius)
         y1 = self.y + (2 * self.radius)
         self.canvas.create_oval(self.x, self.y, x1, y1, outline=self.color, fill=self.color, tags=self.tags)
@@ -65,7 +67,9 @@ class Ball:
         return None
 
     # Calculate and update u and a given a rhythm and tempo
-    def set_speed(self, rhythm, tempo):
+    def set_speed(self):
+        rhythm = self.get_rhythm()
+        tempo = self.get_tempo()
         t = calc_t(rhythm, tempo)
         u = calc_u(t)
         a = calc_a(t, u)
