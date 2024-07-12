@@ -62,8 +62,9 @@ class Ball:
     # Reset the ball's position on the canvas
     def reset(self):
         y = self.y
-        dy = 600 - y
+        dy = 600 - self.y
         self.move(0, dy)
+        self.y = 600
         return None
 
     # Move ball on the canvas
