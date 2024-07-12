@@ -1,6 +1,8 @@
 from tkinter import *
 from ball import *
 
+global tempo
+
 # Create window and set dimensions
 pv = Tk()
 pv.title("Polyrhythm Visualizer")
@@ -9,6 +11,10 @@ pv.geometry("1500x1000")
 # Create Frame and set dimensions
 f = Frame(pv, width=1500, height=200, bg="white")
 f.pack()
+
+# Create text boxes for input
+# tempoInput = Text(f, width = 200, height=100, bg="white")
+# tempoInput.pack()
 
 # Create canvas and set dimensions
 canvas = Canvas(pv, width=1500, height=800, bg="white")
@@ -33,6 +39,5 @@ balls.append(ball3)
 while True:
     pv.update_idletasks()
     pv.update()
-    sleep(0.01)
     for ball in balls:
         ball.update()
