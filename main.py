@@ -20,6 +20,10 @@ f.pack()
 canvas = Canvas(pv, width=1500, height=800, bg="white")
 canvas.pack()
 
+# Add ground and ceiling lines to canvas
+ground = canvas.create_line(0, 700,1500, 700)
+ceiling = canvas.create_line(0, 100,1500, 100)
+
 # Add ball(s) to canvas (testing)
 balls = []
 ball1 = Ball(canvas, "ball1", 400, "blue")
