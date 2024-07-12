@@ -31,5 +31,7 @@ def calc_s(t, u, a):
     s = (u * t) + (0.5 * a * pow(t, 2.0))
     if s < 0:
         return 0
+    elif s > MAX_HEIGHT:
+        return MAX_HEIGHT
     else:
         return s
