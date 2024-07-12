@@ -27,6 +27,15 @@ class Ball:
         self.tempo = 0
         self.rhythm = 0
 
+    # Set ball's tempo
+    def set_tempo(self, tempo):
+        self.tempo = tempo
+        return None
+
+    # Get ball's tempo
+    def get_tempo(self):
+        return self.tempo
+
     # Draw the ball on the canvas
     def draw(self):
         x1 = self.x + (2 * self.radius)
