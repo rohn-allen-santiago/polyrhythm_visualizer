@@ -41,11 +41,6 @@ class Ball:
         self.rhythm = rhythm
         return None
 
-    # Set ball's y value
-    def set_y(self, y):
-        self.y = y
-        return None
-
     # Get ball's tempo
     def get_rhythm(self):
         return self.rhythm
@@ -62,6 +57,13 @@ class Ball:
     # Delete the ball from the canvas
     def delete(self):
         self.canvas.delete(self.tags)
+        return None
+
+    # Reset the ball's position on the canvas
+    def reset(self):
+        y = self.y
+        dy = 600 - y
+        self.move(0, dy)
         return None
 
     # Move ball on the canvas
