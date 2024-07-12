@@ -14,7 +14,7 @@ from pygame import mixer
 class Ball:
 
     # Initialize the ball object
-    def __init__(self, canvas, tags, x, color):
+    def __init__(self, canvas, tags, x, color, tempo, rhythm):
         self.canvas = canvas
         self.tags = tags
         self.x = x
@@ -24,6 +24,8 @@ class Ball:
         self.time = time()
         self.u= 0.0
         self.a = 0.0
+        self.tempo = 0
+        self.rhythm = 0
 
     # Draw the ball on the canvas
     def draw(self):
@@ -78,12 +80,3 @@ class Ball:
         mixer.music.load("audio/metronome.mp3")
         mixer.music.play()
         return None
-
-
-
-
-
-
-
-
-
