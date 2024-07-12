@@ -41,6 +41,11 @@ class Ball:
         self.rhythm = rhythm
         return None
 
+    # Set ball's y value
+    def set_y(self, y):
+        self.y = y
+        return None
+
     # Get ball's tempo
     def get_rhythm(self):
         return self.rhythm
