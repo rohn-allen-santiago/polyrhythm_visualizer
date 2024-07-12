@@ -34,4 +34,4 @@ def calc_s(t, u, a):
     elif s > MAX_HEIGHT:
         return MAX_HEIGHT
     else:
-        return s
+        return round(s)
