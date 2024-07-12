@@ -24,6 +24,26 @@ class Ball:
         self.time = time()
         self.u= 0.0
         self.a = 0.0
+        self.tempo = 0.0
+        self.rhythm = 0.0
+
+    # Set ball's tempo
+    def set_tempo(self, tempo):
+        self.tempo = tempo
+        return None
+
+    # Get ball's tempo
+    def get_tempo(self):
+        return self.tempo
+
+    # Set bal's rhythm
+    def set_rhythm(self, rhythm):
+        self.rhythm = rhythm
+        return None
+
+    # Get ball's tempo
+    def get_rhythm(self):
+        return self.rhythm
 
     # Draw the ball on the canvas
     def draw(self):
@@ -39,13 +59,26 @@ class Ball:
         self.canvas.delete(self.tags)
         return None
 
+    # Reset the ball's position on the canvas
+    def reset(self):
+        y = self.y
+        dy = 600 - self.y
+        self.move(0, dy)
+        self.y = 600
+        return None
+
     # Move ball on the canvas
     def move(self, dx, dy):
         self.canvas.move(self.tags, dx, dy)
         return None
 
     # Calculate and update u and a given a rhythm and tempo
-    def set_speed(self, rhythm, tempo):
+    def set_speed(self):
+        if self.tempo == 0 or self.rhythm==0:
+            self.reset()
+            return None
+        rhythm = self.get_rhythm()
+        tempo = self.get_tempo()
         t = calc_t(rhythm, tempo)
         u = calc_u(t)
         a = calc_a(t, u)
@@ -55,6 +88,9 @@ class Ball:
 
     # Update the ball's position on the canvas
     def update(self):
+        if self.tempo == 0 or self.rhythm==0:
+            self.reset()
+            return None
         t = time() - self.time
         s = calc_s(t, self.u, self.a)
         if s <= 0:
@@ -78,12 +114,3 @@ class Ball:
         mixer.music.load("audio/metronome.mp3")
         mixer.music.play()
         return None
-
-
-
-
-
-
-
-
-
