@@ -75,6 +75,7 @@ class Ball:
     # Calculate and update u and a given a rhythm and tempo
     def set_speed(self):
         if self.tempo == 0 or self.rhythm==0:
+            self.reset()
             return None
         rhythm = self.get_rhythm()
         tempo = self.get_tempo()
@@ -88,6 +89,7 @@ class Ball:
     # Update the ball's position on the canvas
     def update(self):
         if self.tempo == 0 or self.rhythm==0:
+            self.reset()
             return None
         t = time() - self.time
         s = calc_s(t, self.u, self.a)
