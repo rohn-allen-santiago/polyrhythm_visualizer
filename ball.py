@@ -47,8 +47,6 @@ class Ball:
 
     # Draw the ball on the canvas
     def draw(self):
-        if (self.get_tempo() == 0) or (self.get_rhythm() == 0):
-            return None
         x1 = self.x + (2 * self.radius)
         y1 = self.y + (2 * self.radius)
         self.canvas.create_oval(self.x, self.y, x1, y1, outline=self.color, fill=self.color, tags=self.tags)
