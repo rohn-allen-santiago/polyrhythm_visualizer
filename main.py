@@ -1,6 +1,10 @@
 from tkinter import *
 from ball import *
 
+# Constants
+MAX_TEMPO = 120
+MAX_RHYTHM = 9
+
 # Create window and set dimensions
 pv = Tk()
 pv.title("Polyrhythm Visualizer")
@@ -10,17 +14,17 @@ pv.geometry("1500x1000")
 f = Frame(pv, width=1500, height=200, bg="white")
 f.pack()
 
-# Create entry boxes for input
+# Create labels and entry boxes for input
 tempoLabel = Label(f, text="Tempo")
-tempoLabel.grid(row=0,column=0, pady=5)
+tempoLabel.grid(row=0,column=4, pady=40)
 tempoInput = Entry(f, bg="white")
-tempoInput.grid(row=0,column=1, pady=5)
+tempoInput.grid(row=0,column=5, pady=40)
 rhythms = []
 for i in range(5):
     name = "Ball " + str(i + 1)
-    Label(f, bg="white", text=name).grid(row=i+1, column=0, pady=5)
+    Label(f, bg="white", text=name).grid(row=1, column=(i * 2), padx = 35, pady=40)
     entry = Entry(f, bg="white")
-    entry.grid(row=i+1, column=1, pady=5)
+    entry.grid(row=1, column=(i * 2) + 1, padx = 35, pady=40)
     rhythms.append(entry)
 
 # Create canvas and set dimensions
@@ -49,12 +53,24 @@ ball5 = Ball(canvas, "ball5", 1250, "purple")
 ball5.draw()
 balls.append(ball5)
 
+# Keep count of how many labels contain a number
+count = 0
+
 # Set tempo for each ball to user inputted tempo
 def change_tempo():
     tempo = tempoInput.get()
+    # Handle non digit characters
+    if not any(char.isdigit() for char in tempo):
+        tempoInput.delete(0, len(tempo))
+        tempo = ""
     if tempo == "":
-        return None
+        tempo = "0"
     tempo = int(tempo)
+    # Set tempo to max tempo if max tempo is exceeded by the user
+    if tempo > MAX_TEMPO:
+        tempoInput.delete(0, len(str(tempo)))
+        tempoInput.insert(0, str(MAX_TEMPO))
+        tempo = MAX_TEMPO
     for ball in balls:
         ball.set_tempo(tempo)
         ball.set_speed()
@@ -62,14 +78,36 @@ def change_tempo():
 
 # Set rhythm for each ball to user inputted rhythm
 def change_rhythm():
+    tempCount = 0
     for i in range(5):
-        print(type(rhythms))
+        ball = balls[i]
         rhythm = rhythms[i].get()
+        # Handle non digit characters
+        if not any(char.isdigit() for char in rhythm):
+            tempoInput.delete(0, len(rhythm))
+            rhythm = ""
         if rhythm == "":
-            continue
+            rhythm = "0"
+        else:
+            tempCount += 1
         rhythm = int(rhythm)
-        balls[i].set_rhythm(rhythm)
-        balls[i].set_speed()
+        # Set rhythm to max rhythm if max rhythm is exceeded by the user
+        if rhythm > MAX_RHYTHM:
+            rhythms[i].delete(0, len(str(rhythm)))
+            rhythms[i].insert(0, str(MAX_RHYTHM))
+            rhythm = MAX_RHYTHM
+        ball.set_rhythm(rhythm)
+        ball.set_speed()
+    global count
+    if tempCount > count:
+        reset_all()
+    count = tempCount
+    return None
+
+# Reset every ball to ground position
+def reset_all():
+    for ball in balls:
+        ball.reset()
     return None
 
 # Run main loop

@@ -65,6 +65,7 @@ class Ball:
         dy = 600 - self.y
         self.move(0, dy)
         self.y = 600
+        self.time = time()
         return None
 
     # Move ball on the canvas
@@ -104,7 +105,7 @@ class Ball:
         self.y = self.y + dy
 
         # Move the ball by the calculated dy
-        self.move(0, round(dy))
+        self.move(0, dy)
 
         return None
 
