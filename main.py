@@ -1,6 +1,10 @@
 from tkinter import *
 from ball import *
 
+# Constants
+MAX_TEMPO = 120
+MAX_RHYTHM = 9
+
 # Create window and set dimensions
 pv = Tk()
 pv.title("Polyrhythm Visualizer")
@@ -55,6 +59,10 @@ count = 0
 # Set tempo for each ball to user inputted tempo
 def change_tempo():
     tempo = tempoInput.get()
+    # Handle non digit characters
+    if not any(char.isdigit() for char in tempo):
+        tempoInput.delete(0, len(tempo))
+        return None
     if tempo == "":
         tempo = "0"
     tempo = int(tempo)
