@@ -65,6 +65,7 @@ class Ball:
         dy = 600 - self.y
         self.move(0, dy)
         self.y = 600
+        self.time = time()
         return None
 
     # Move ball on the canvas
