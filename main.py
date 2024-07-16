@@ -10,17 +10,17 @@ pv.geometry("1500x1000")
 f = Frame(pv, width=1500, height=200, bg="white")
 f.pack()
 
-# Create entry boxes for input
+# Create labels and entry boxes for input
 tempoLabel = Label(f, text="Tempo")
-tempoLabel.grid(row=0,column=0, pady=5)
+tempoLabel.grid(row=0,column=4, pady=40)
 tempoInput = Entry(f, bg="white")
-tempoInput.grid(row=0,column=1, pady=5)
+tempoInput.grid(row=0,column=5, pady=40)
 rhythms = []
 for i in range(5):
     name = "Ball " + str(i + 1)
-    Label(f, bg="white", text=name).grid(row=i+1, column=0, pady=5)
+    Label(f, bg="white", text=name).grid(row=1, column=(i * 2), padx = 35, pady=40)
     entry = Entry(f, bg="white")
-    entry.grid(row=i+1, column=1, pady=5)
+    entry.grid(row=1, column=(i * 2) + 1, padx = 35, pady=40)
     rhythms.append(entry)
 
 # Create canvas and set dimensions
