@@ -49,11 +49,14 @@ ball5 = Ball(canvas, "ball5", 1250, "purple")
 ball5.draw()
 balls.append(ball5)
 
+# Keep count of how many labels contain a number
+count = 0
+
 # Set tempo for each ball to user inputted tempo
 def change_tempo():
     tempo = tempoInput.get()
     if tempo == "":
-        return None
+        tempo = "0"
     tempo = int(tempo)
     for ball in balls:
         ball.set_tempo(tempo)
@@ -62,14 +65,27 @@ def change_tempo():
 
 # Set rhythm for each ball to user inputted rhythm
 def change_rhythm():
+    tempCount = 0
     for i in range(5):
-        print(type(rhythms))
+        ball = balls[i]
         rhythm = rhythms[i].get()
         if rhythm == "":
-            continue
+            rhythm = "0"
+        else:
+            tempCount += 1
         rhythm = int(rhythm)
-        balls[i].set_rhythm(rhythm)
-        balls[i].set_speed()
+        ball.set_rhythm(rhythm)
+        ball.set_speed()
+    global count
+    if tempCount > count:
+        reset_all()
+    count = tempCount
+    return None
+
+# Reset every ball to ground position
+def reset_all():
+    for ball in balls:
+        ball.reset()
     return None
 
 # Run main loop
