@@ -62,10 +62,15 @@ def change_tempo():
     # Handle non digit characters
     if not any(char.isdigit() for char in tempo):
         tempoInput.delete(0, len(tempo))
-        return None
+        tempo = ""
     if tempo == "":
         tempo = "0"
     tempo = int(tempo)
+    # Set tempo to max tempo if max tempo is exceeded by the user
+    if tempo > MAX_TEMPO:
+        tempoInput.delete(0, len(str(tempo)))
+        tempoInput.insert(0, str(MAX_TEMPO))
+        tempo = MAX_TEMPO
     for ball in balls:
         ball.set_tempo(tempo)
         ball.set_speed()
@@ -77,11 +82,20 @@ def change_rhythm():
     for i in range(5):
         ball = balls[i]
         rhythm = rhythms[i].get()
+        # Handle non digit characters
+        if not any(char.isdigit() for char in rhythm):
+            tempoInput.delete(0, len(rhythm))
+            rhythm = ""
         if rhythm == "":
             rhythm = "0"
         else:
             tempCount += 1
         rhythm = int(rhythm)
+        # Set rhythm to max rhythm if max rhythm is exceeded by the user
+        if rhythm > MAX_RHYTHM:
+            rhythms[i].delete(0, len(str(rhythm)))
+            rhythms[i].insert(0, str(MAX_RHYTHM))
+            rhythm = MAX_RHYTHM
         ball.set_rhythm(rhythm)
         ball.set_speed()
     global count
