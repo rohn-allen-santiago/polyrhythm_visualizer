@@ -105,7 +105,7 @@ class Ball:
         self.y = self.y + dy
 
         # Move the ball by the calculated dy
-        self.move(0, round(dy))
+        self.move(0, dy)
 
         return None
 
